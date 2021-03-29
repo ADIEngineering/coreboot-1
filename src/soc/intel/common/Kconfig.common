@@ -6,6 +6,11 @@ config SOC_INTEL_COMMON
 	help
 	  common code for Intel SOCs
 
+config SOC_INTEL_COMMON_SERVER
+	bool
+	help
+	  common code for Intel Server SOCs
+
 if SOC_INTEL_COMMON
 
 comment "Intel SoC Common Code for IP blocks"

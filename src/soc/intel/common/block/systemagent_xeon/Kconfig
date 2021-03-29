@@ -1,0 +1,14 @@
+config SOC_INTEL_COMMON_BLOCK_SA_XEON
+	bool
+	help
+	  Intel Processor common System Agent (XEON) support
+
+if SOC_INTEL_COMMON_BLOCK_SA_XEON
+
+config MMCONF_BASE_ADDRESS
+	default 0xC0000000
+
+config MMCONF_BUS_NUMBER
+	default 256
+
+endif

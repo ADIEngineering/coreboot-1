@@ -66,9 +66,11 @@ struct SystemMemoryMapElement {
 	UINT8    ImcInterBitmap; // IMC interleave bitmap for this DRAM rule - ONLY IN NUMA
 	UINT32   BaseAddress;    // Base Address of the element in 64MB chunks
 	UINT32   ElementSize;    // Size of this memory element in 64MB chunks
+#if 0 // XXX JJD, not needed.  Ircona added to their FSP mods for some reason
 	// Type of this memory element; Bit0: 1LM  Bit1: 2LM  Bit2: PMEM
 	// Bit3: PMEM-cache  Bit4: BLK Window  Bit5: CSR/Mailbox/Ctrl region
 	UINT16   Type;
+#endif
 };
 
 struct SystemMemoryMapHob {
@@ -76,15 +78,19 @@ struct SystemMemoryMapHob {
 	UINT32  lowMemSize;		 // Mem size in 64MB units for below 4GB mem.
 	UINT32  highMemBase;		// Mem base in 64MB units for above 4GB mem.
 	UINT32  highMemSize;		// Mem size in 64MB units for above 4GB mem.
+#if 0 // XXX JJD, no idea what this garbage is
 	UINT32  asilLoMemBase;	// Mem base in 64MB units for below 4GB mem.
 	UINT32  asilHiMemBase;	// Mem base in 64MB units for above 4GB mem.
 	UINT32  asilLoMemSize;	// Mem size in 64MB units for below 4GB mem.
 	UINT32  asilHiMemSize;	// Mem size in 64MB units for above 4GB mem.
+#endif
 
 	UINT32  memSize;			// Total physical memory size
 	UINT16  memFreq;			// Mem Frequency
 	UINT8	memMode;			// 0 - Independent, 1 - Lockstep
+#if 0 // XXX JJD not implemented
 	UINT8	volMemMode;	 // 0 - 1LM, 1 - 2LM
+#endif
 	UINT8	DimmType;
 	UINT16  DramType;
 	UINT8	DdrVoltage;

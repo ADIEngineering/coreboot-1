@@ -1,0 +1,2 @@
+config BOARD_OCP_SKX_D_CC
+	bool "SKX_D_CC"

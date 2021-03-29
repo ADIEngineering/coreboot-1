@@ -3,6 +3,8 @@
 #ifndef SOC_INTEL_COMMON_BLOCK_CFG_H
 #define SOC_INTEL_COMMON_BLOCK_CFG_H
 
+#if (!CONFIG(SOC_INTEL_COMMON_SERVER))
+
 #include <intelblocks/gspi.h>
 #include <drivers/i2c/designware/dw_i2c.h>
 #include <intelblocks/mmc.h>
@@ -25,6 +27,26 @@ struct soc_intel_common_config {
 	uint8_t pch_thermal_trip;
 	struct mmc_dll_params emmc_dll;
 };
+
+#else
+
+#include <stdint.h>
+enum {
+	CHIPSET_LOCKDOWN_FSP = 0, /* FSP handles locking per UPDs */
+	CHIPSET_LOCKDOWN_COREBOOT, /* coreboot handles locking */
+};
+
+/*
+ * This structure will hold data required by common blocks.
+ * These are soc specific configurations which will be filled by soc.
+ * We'll fill this structure once during init and use the data in common block.
+ */
+struct soc_intel_common_config {
+	int chipset_lockdown;
+	/* PCH Thermal Trip Temperature in deg C */
+	uint8_t pch_thermal_trip;
+};
+#endif
 
 /* This function to retrieve soc config structure required by common code */
 const struct soc_intel_common_config *chip_get_common_soc_structure(void);

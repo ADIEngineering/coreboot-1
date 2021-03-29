@@ -1,0 +1,59 @@
+## SPDX-License-Identifier: GPL-2.0-or-later
+
+chip soc/intel/xeon_d
+
+	# seems like no GEN IO DEC on SKX-D-CC
+#	register "gen2_dec" = "0x000c0ca1" # IPMI KCS
+
+	# Intel Common Server SoC config
+	register "common_soc_config" = "{
+		.chipset_lockdown = CHIPSET_LOCKDOWN_COREBOOT,
+		.pch_thermal_trip = 0,
+	}"
+
+	device cpu_cluster 0 on
+	  device lapic 0 on end
+	end
+
+	device domain 0 on
+		device pci 00.0 on end # Host bridge
+		device pci 04.0 on end # Intel Corporation SkyLake-E CBDMA Registers
+		device pci 04.1 on end # Intel Corporation SkyLake-E CBDMA Registers
+		device pci 04.2 on end # Intel Corporation SkyLake-E CBDMA Registers
+		device pci 04.3 on end # Intel Corporation SkyLake-E CBDMA Registers
+		device pci 04.4 on end # Intel Corporation SkyLake-E CBDMA Registers
+		device pci 04.5 on end # Intel Corporation SkyLake-E CBDMA Registers
+		device pci 04.6 on end # Intel Corporation SkyLake-E CBDMA Registers
+		device pci 04.7 on end # Intel Corporation SkyLake-E CBDMA Registers
+		device pci 05.0 on end # Intel Corporation SkyLake-E MM/Vt-d Configuration Registers
+		device pci 05.2 on end # Intel Corporation Device 2025
+		device pci 05.4 on end # Intel Corporation Device 2026
+		device pci 08.0 on end # Intel Corporation SkyLake-E Ubox Registers
+		device pci 08.1 on end # Intel Corporation SkyLake-E Ubox Registers
+		device pci 08.2 on end # Intel Corporation SkyLake-E Ubox Registers
+		device pci 11.0 on end # Intel Corporation C620 Series Chipset Family MROM 0
+		device pci 11.1 on end # Intel Corporation C620 Series Chipset Family MROM 1
+		device pci 11.5 on end # Intel Corporation C620 Series Chipset Family SSATA Controller [AHCI mode]
+		device pci 14.0 on end # Intel Corporation C620 Series Chipset Family USB 3.0 xHCI Controller
+		device pci 16.0 on end # Intel Corporation C620 Series Chipset Family MEI Controller #1
+		device pci 16.1 on end # Intel Corporation C620 Series Chipset Family MEI Controller #2
+		device pci 16.4 on end # Intel Corporation C620 Series Chipset Family MEI Controller #3
+		device pci 17.0 on end # Intel Corporation C620 Series Chipset Family SATA Controller [AHCI mode]
+		device pci 1c.0 on end # PCI bridge: Intel Corporation C620 Series Chipset Family PCI Express Root Port #1
+		device pci 1c.4 on end # PCI bridge: Intel Corporation C620 Series Chipset Family PCI Express Root Port #5
+		device pci 1f.0 on
+#			chip drivers/ipmi # BMC KCS
+#				device pnp ca2.0 on end
+#				register "bmc_i2c_address" = "0x20"
+#				register "bmc_boot_timeout" = "90"
+#			end
+#			chip drivers/ipmi/ocp # OCP specific IPMI porting
+#				device pnp ca2.1 on end
+#			end
+		end # Intel Corporation C621 Series Chipset LPC/eSPI Controller
+		device pci 1f.1 hidden end # p2sb
+		device pci 1f.2 on end # Intel Corporation C620 Series Chipset Family Power Management Controller
+		device pci 1f.4 on end # Intel Corporation C620 Series Chipset Family SMBus
+		device pci 1f.5 on end # Intel Corporation C620 Series Chipset Family SPI Controller
+	end
+end

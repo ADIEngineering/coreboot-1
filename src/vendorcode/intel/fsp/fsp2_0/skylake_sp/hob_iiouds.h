@@ -166,7 +166,9 @@ typedef struct {
 } PLATFORM_DATA;
 
 typedef struct {
+#if 0 // XXX JJD ???
 	uint32_t         FILLER_BUG;
+#endif
 	// Current programmed CSI (or UPI) Link speed (Slow/Full speed mode)
 	uint8_t          CurrentCsiLinkSpeed;
 	// Current requested CSI (or UPI) Link frequency (in GT)
@@ -187,6 +189,7 @@ typedef struct {
 	uint8_t          SystemRasType;
 	// 1,..4. Total number of CPU packages installed and detected (1..4)by QPI RC
 	uint8_t          numCpus;
+#if 0 // XXX JJD diked out
 	// Fused Core Mask in the package
 	uint32_t         FusedCores[MAX_SOCKET];
 	// Current activated core Mask in the package
@@ -205,6 +208,7 @@ typedef struct {
 	uint32_t         IssConfigTdpPowerInfo[TDP_MAX_LEVEL];
 	// get B2P CONFIG_TDP_GET_CORE_COUNT
 	uint8_t          IssConfigTdpCoreCount[TDP_MAX_LEVEL];
+#endif
 	// bitmap of sockets with CPUs present detected by QPI RC
 	uint32_t         socketPresentBitMap;
 	// bitmap of NID w/ fpga  present detected by QPI RC
@@ -229,7 +233,9 @@ typedef struct {
 	uint8_t          IoDcMode;
 	uint8_t          CpuAccSupport;
 	uint8_t          SmbusErrorRecovery;
+#if 0 // XXX JJD, missing from RC
 	uint8_t          AepDimmPresent;
+#endif
 } SYSTEM_STATUS;
 
 typedef struct {
