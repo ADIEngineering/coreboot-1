@@ -40,10 +40,22 @@ static const struct region_name region_names[MAX_REGIONS] = {
 	{ "Intel ME", "me", "flashregion_2_intel_me.bin", "SI_ME" },
 	{ "GbE", "gbe", "flashregion_3_gbe.bin", "SI_GBE" },
 	{ "Platform Data", "pd", "flashregion_4_platform_data.bin", "SI_PDR" },
+#if 0
 	{ "Reserved", "res1", "flashregion_5_reserved.bin", NULL },
 	{ "Reserved", "res2", "flashregion_6_reserved.bin", NULL },
+#else
+	{ "Device Expansion 1", "devexp", "flashregion_5_device_expansion.bin",  "SI_DEV_EXP1" },
+	{ "Secondary BIOS", "bios2", "flashregion_6_bios2.bin", "SI_BIOS2" },
+#endif
 	{ "Reserved", "res3", "flashregion_7_reserved.bin", NULL },
 	{ "EC", "ec", "flashregion_8_ec.bin", "SI_EC" },
+	{ "Reserved", "res4", "flashregion_9_reserved.bin", NULL },
+	{ "IE", "ie", "flashregion_10_ie.bin", "SI_IE" },
+	{ "10GbE", "10gbe", "flashregion_11_10gbeA.bin", "SI_10GBA" },
+	{ "Reserved", "res5", "flashregion_12_reserved.bin", NULL },
+	{ "Reserved", "res6", "flashregion_13_reserved.bin", NULL },
+	{ "Reserved", "res7", "flashregion_14_reserved.bin", NULL },
+	{ "PTT", "ptt", "flashregion_15_ptt.bin", "SI_PTT"}
 };
 
 /* port from flashrom */
@@ -1412,6 +1424,21 @@ static void inject_region(const char *filename, char *image, int size,
 		memset(image + region.base, 0xff, offset);
 	}
 
+#if 1 // XXX JJD
+	/*
+	 * Handle 10GbE region that may have 2 firmwares, but there is only
+	 * a single flash region for them.
+	 */
+	if ((region_type == 11) && (region_size < region.size)) {
+		fprintf(stderr, "Region %s is %d(0x%x) bytes. File is %d(0x%x)"
+				" bytes. Since this is a 10GB firmware, this "
+				"is ok\n",
+				region_name(region_type), region.size,
+				region.size, region_size, region_size);
+		offset = region.size - region_size;
+	}
+#endif
+
 	if (size < region.base + offset + region_size) {
 		fprintf(stderr, "Output file is too small. (%d < %d)\n",
 			size, region.base + offset + region_size);
@@ -1742,6 +1769,8 @@ int main(int argc, char *argv[])
 			region_fname[0] = '\0';
 			region_fname++;
 			// Descriptor, BIOS, ME, GbE, Platform
+			// Device Expansion, BIOS Region 2
+			// Innovation Engine, 10GbE, PTT
 			// valid type?
 			if (!strcasecmp("Descriptor", region_type_string))
 				region_type = 0;
@@ -1755,12 +1784,22 @@ int main(int argc, char *argv[])
 				region_type = 4;
 			else if (!strcasecmp("res1", region_type_string))
 				region_type = 5;
+			else if (!strcasecmp("Device", region_type_string))
+				region_type = 5;
 			else if (!strcasecmp("res2", region_type_string))
+				region_type = 6;
+			else if (!strcasecmp("Secondary", region_type_string))
 				region_type = 6;
 			else if (!strcasecmp("res3", region_type_string))
 				region_type = 7;
 			else if (!strcasecmp("EC", region_type_string))
 				region_type = 8;
+			else if (!strcasecmp("IE", region_type_string))
+				region_type = 10;
+			else if (!strcasecmp("10GB", region_type_string))
+				region_type = 11;
+			else if (!strcasecmp("PTT", region_type_string))
+				region_type = 15;
 			if (region_type == -1) {
 				fprintf(stderr, "No such region type: '%s'\n\n",
 					region_type_string);

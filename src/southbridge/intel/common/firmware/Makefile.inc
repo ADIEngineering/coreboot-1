@@ -33,6 +33,18 @@ endif
 ifeq ($(CONFIG_HAVE_EC_BIN),y)
 add_intel_firmware: $(call strip_quotes,$(CONFIG_EC_BIN_PATH))
 endif
+ifeq ($(CONFIG_HAVE_EXP_1_REGION_BIN),y)
+add_intel_firmware: $(call strip_quotes,$(CONFIG_DEV_EXP_1_BIN_PATH))
+endif
+ifeq ($(CONFIG_HAVE_BIOS2_REGION_BIN),y)
+add_intel_firmware: $(call strip_quotes,$(CONFIG_BIOS2_BIN_PATH))
+endif
+ifeq ($(CONFIG_HAVE_IE_REGION_BIN),y)
+add_intel_firmware: $(call strip_quotes,$(CONFIG_IE_BIN_PATH))
+endif
+ifeq ($(CONFIG_HAVE_10GB_REGION_BIN),y)
+add_intel_firmware: $(call strip_quotes,$(CONFIG_10GB_BIN_PATH))
+endif
 add_intel_firmware: $(obj)/coreboot.pre $(IFDTOOL)
 	printf "    DD         Adding Intel Firmware Descriptor\n"
 	dd if=$(IFD_BIN_PATH) \
@@ -72,6 +84,46 @@ ifeq ($(CONFIG_HAVE_EC_BIN),y)
 	$(objutil)/ifdtool/ifdtool \
 		$(IFDTOOL_USE_CHIPSET) \
 		-i EC:$(CONFIG_EC_BIN_PATH) \
+		-O $(obj)/coreboot.pre \
+		$(obj)/coreboot.pre
+endif
+ifeq ($(CONFIG_HAVE_DEV_EXP_1_BIN),y)
+	printf "    IFDTOOL    devexp.bin -> coreboot.pre\n"
+	$(objutil)/ifdtool/ifdtool \
+		$(IFDTOOL_USE_CHIPSET) \
+		-i "Device Expansion 1":$(CONFIG_DEV_EXP_1_BIN_PATH) \
+		-O $(obj)/coreboot.pre \
+		$(obj)/coreboot.pre
+endif
+ifeq ($(CONFIG_HAVE_BIOS2_REGION_BIN),y)
+	printf "    IFDTOOL    bios2.bin -> coreboot.pre\n"
+	$(objutil)/ifdtool/ifdtool \
+		$(IFDTOOL_USE_CHIPSET) \
+		-i "Secondary BIOS":$(CONFIG_BIOS2_BIN_PATH) \
+		-O $(obj)/coreboot.pre \
+		$(obj)/coreboot.pre
+endif
+ifeq ($(CONFIG_HAVE_IE_REGION_BIN),y)
+	printf "    IFDTOOL    ie.bin -> coreboot.pre\n"
+	$(objutil)/ifdtool/ifdtool \
+		$(IFDTOOL_USE_CHIPSET) \
+		-i IE:$(CONFIG_IE_BIN_PATH) \
+		-O $(obj)/coreboot.pre \
+		$(obj)/coreboot.pre
+endif
+ifeq ($(CONFIG_HAVE_10GB_REGION_BIN),y)
+	printf "    IFDTOOL    10gbe.bin -> coreboot.pre\n"
+	$(objutil)/ifdtool/ifdtool \
+		$(IFDTOOL_USE_CHIPSET) \
+		-i 10GbEA:$(CONFIG_10GB_BIN_PATH) \
+		-O $(obj)/coreboot.pre \
+		$(obj)/coreboot.pre
+endif
+ifeq ($(CONFIG_HAVE_PTT_REGION_BIN),y)
+	printf "    IFDTOOL    ptt.bin -> coreboot.pre\n"
+	$(objutil)/ifdtool/ifdtool \
+		$(IFDTOOL_USE_CHIPSET) \
+		-i EC:$(CONFIG_PTT_BIN_PATH) \
 		-O $(obj)/coreboot.pre \
 		$(obj)/coreboot.pre
 endif

@@ -136,6 +136,115 @@ config EC_BIN_PATH
 	depends on HAVE_EC_BIN
 	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/ec.bin"
 
+config MAINBOARD_USES_IFD_DEV_EXP_REGION
+	def_bool n
+
+config HAVE_DEV_EXP_1_REGION_BIN
+	bool "Add Device Expansion Region 1"
+	depends on HAVE_IFD_BIN && MAINBOARD_USES_IFD_DEV_EXP_REGION
+	help
+	  The device expansion region 1 firmware file.
+
+	  Select this if you are going to use the device expansion region 1
+	  and have the firmware. The firmware will be added to final image
+	  through ifdtool.
+
+config DEV_EXP_1_BIN_PATH
+	string "Path to Device Expansion 1 firmware"
+	depends on HAVE_DEV_EXP_1_REGION_BIN
+	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/DeviceExp1.bin"
+
+config MAINBOARD_USES_BIOS2_REGION
+	def_bool n
+
+config HAVE_BIOS2_REGION_BIN
+	bool "Add BIOS 2 Region"
+	depends on HAVE_IFD_BIN && MAINBOARD_USES_IFD_BIOS2_REGION
+	help
+	  The BIOS 2 region firmware file.
+
+	  Select this if you are going to use the BIOS 2 region
+	  and have the firmware. The firmware will be added to final image
+	  through ifdtool.
+
+config BIOS2_BIN_PATH
+	string "Path to BIOS 2 firmware"
+	depends on HAVE_DEV_BIOS2_BIN
+	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/BIOS2Region.bin"
+
+config MAINBOARD_USES_IE_REGION
+	def_bool n
+
+config HAVE_IE_REGION_BIN
+	bool "Add Innovation Engine Region"
+	depends on HAVE_IFD_BIN && MAINBOARD_USES_IFD_IE_REGION
+	help
+	  The Innovation Engine region firmware file.
+
+	  Select this if you are going to use the Innovation Engine region
+	  and have the firmware. The firmware will be added to final image
+	  through ifdtool.
+
+config IE_BIN_PATH
+	string "Path to Innovation Engine firmware"
+	depends on HAVE_DEV_IE_BIN
+	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/IERegion.bin"
+
+config MAINBOARD_USES_10GB_REGION
+	def_bool n
+
+config HAVE_10GB_BIN
+	bool "Add 10GbE Firmware Region"
+	depends on HAVE_IFD_BIN && MAINBOARD_USES_IFD_10GB_REGION
+	help
+	  The 10GbE region firmware file.
+
+	  Select this if you are going to use the 10GbE region
+	  and have the firmware. The firmware will be added to final image
+	  through ifdtool.
+
+config 10GB_BIN_PATH
+	string "Path to 10GbE firmware"
+	depends on HAVE_10GB_BIN
+	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/10GbeARegion.bin"
+
+config MAINBOARD_USES_10GB_2_REGION
+	def_bool n
+	depends on MAINBOARD_USES_10GB_REGION
+
+config HAVE_10GB_2_BIN
+	bool "Add 10GbE 2 Firmware Region"
+	depends on HAVE_IFD_BIN && MAINBOARD_USES_IFD_10GB_2_REGION
+	help
+	  The 10GbE 2 region firmware file.
+
+	  Select this if you are going to use the 10GbE 2 region
+	  and have the firmware. The firmware will be added to final image
+	  through ifdtool.
+
+config 10GB_2_BIN_PATH
+	string "Path to 10GbE 2 firmware"
+	depends on HAVE_10GB_2_BIN
+	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/10GbeARegion.bin"
+
+config MAINBOARD_USES_PTT_REGION
+	def_bool n
+
+config HAVE_PTT_REGION_BIN
+	bool "Add Platform Trust Technology Firmware Region"
+	depends on HAVE_IFD_BIN && MAINBOARD_USES_IFD_PTT_REGION
+	help
+	  The Platform Trust Technology region firmware file.
+
+	  Select this if you are going to use the PTT region
+	  and have the firmware. The firmware will be added to final image
+	  through ifdtool.
+
+config PTT_BIN_PATH
+	string "Path to Platform Trust Technology firmware"
+	depends on HAVE_DEV_PTT_BIN
+	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/PTTRegion.bin"
+
 choice
 	prompt "Protect flash regions"
 	default UNLOCK_FLASH_REGIONS
