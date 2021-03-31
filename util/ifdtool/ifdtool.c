@@ -1689,7 +1689,7 @@ static void print_usage(const char *name)
 	       "   -V | --newvalue                       The new value to write into PCH strap specified by -S\n"
 	       "   -v | --version:                       print the version\n"
 	       "   -h | --help:                          print this help\n\n"
-	       "<region> is one of Descriptor, BIOS, ME, GbE, Platform, res1, res2, res3\n"
+	       "<region> is one of Descriptor, BIOS, ME, GbE, Platform, res1, res2, res3, EC, 10GB[A/B], PDR\n"
 	       "\n");
 }
 
@@ -1796,7 +1796,7 @@ int main(int argc, char *argv[])
 				region_type = 8;
 			else if (!strcasecmp("IE", region_type_string))
 				region_type = 10;
-			else if (!strcasecmp("10GB", region_type_string))
+			else if (!strstr("10GB", region_type_string))
 				region_type = 11;
 			else if (!strcasecmp("PTT", region_type_string))
 				region_type = 15;

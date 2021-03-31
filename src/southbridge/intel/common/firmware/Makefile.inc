@@ -33,17 +33,20 @@ endif
 ifeq ($(CONFIG_HAVE_EC_BIN),y)
 add_intel_firmware: $(call strip_quotes,$(CONFIG_EC_BIN_PATH))
 endif
-ifeq ($(CONFIG_HAVE_EXP_1_REGION_BIN),y)
+ifeq ($(CONFIG_HAVE_DEV_EXP_1_BIN),y)
 add_intel_firmware: $(call strip_quotes,$(CONFIG_DEV_EXP_1_BIN_PATH))
 endif
-ifeq ($(CONFIG_HAVE_BIOS2_REGION_BIN),y)
+ifeq ($(CONFIG_HAVE_BIOS2_BIN),y)
 add_intel_firmware: $(call strip_quotes,$(CONFIG_BIOS2_BIN_PATH))
 endif
-ifeq ($(CONFIG_HAVE_IE_REGION_BIN),y)
+ifeq ($(CONFIG_HAVE_IE_BIN),y)
 add_intel_firmware: $(call strip_quotes,$(CONFIG_IE_BIN_PATH))
 endif
-ifeq ($(CONFIG_HAVE_10GB_REGION_BIN),y)
+ifeq ($(CONFIG_HAVE_10GB_BIN),y)
 add_intel_firmware: $(call strip_quotes,$(CONFIG_10GB_BIN_PATH))
+endif
+ifeq ($(CONFIG_HAVE_10GB_2_BIN),y)
+add_intel_firmware: $(call strip_quotes,$(CONFIG_10GB_2_BIN_PATH))
 endif
 add_intel_firmware: $(obj)/coreboot.pre $(IFDTOOL)
 	printf "    DD         Adding Intel Firmware Descriptor\n"
@@ -95,7 +98,7 @@ ifeq ($(CONFIG_HAVE_DEV_EXP_1_BIN),y)
 		-O $(obj)/coreboot.pre \
 		$(obj)/coreboot.pre
 endif
-ifeq ($(CONFIG_HAVE_BIOS2_REGION_BIN),y)
+ifeq ($(CONFIG_HAVE_BIOS2_BIN),y)
 	printf "    IFDTOOL    bios2.bin -> coreboot.pre\n"
 	$(objutil)/ifdtool/ifdtool \
 		$(IFDTOOL_USE_CHIPSET) \
@@ -103,7 +106,7 @@ ifeq ($(CONFIG_HAVE_BIOS2_REGION_BIN),y)
 		-O $(obj)/coreboot.pre \
 		$(obj)/coreboot.pre
 endif
-ifeq ($(CONFIG_HAVE_IE_REGION_BIN),y)
+ifeq ($(CONFIG_HAVE_IE_BIN),y)
 	printf "    IFDTOOL    ie.bin -> coreboot.pre\n"
 	$(objutil)/ifdtool/ifdtool \
 		$(IFDTOOL_USE_CHIPSET) \
@@ -111,15 +114,23 @@ ifeq ($(CONFIG_HAVE_IE_REGION_BIN),y)
 		-O $(obj)/coreboot.pre \
 		$(obj)/coreboot.pre
 endif
-ifeq ($(CONFIG_HAVE_10GB_REGION_BIN),y)
+ifeq ($(CONFIG_HAVE_10GB_BIN),y)
 	printf "    IFDTOOL    10gbe.bin -> coreboot.pre\n"
 	$(objutil)/ifdtool/ifdtool \
 		$(IFDTOOL_USE_CHIPSET) \
-		-i 10GbEA:$(CONFIG_10GB_BIN_PATH) \
+		-i 10GbA:$(CONFIG_10GB_BIN_PATH) \
 		-O $(obj)/coreboot.pre \
 		$(obj)/coreboot.pre
 endif
-ifeq ($(CONFIG_HAVE_PTT_REGION_BIN),y)
+ifeq ($(CONFIG_HAVE_10GB_2_BIN),y)
+	printf "    IFDTOOL    10gbe.bin -> coreboot.pre\n"
+	$(objutil)/ifdtool/ifdtool \
+		$(IFDTOOL_USE_CHIPSET) \
+		-i 10GbB:$(CONFIG_10GB_2_BIN_PATH) \
+		-O $(obj)/coreboot.pre \
+		$(obj)/coreboot.pre
+endif
+ifeq ($(CONFIG_HAVE_PTT_BIN),y)
 	printf "    IFDTOOL    ptt.bin -> coreboot.pre\n"
 	$(objutil)/ifdtool/ifdtool \
 		$(IFDTOOL_USE_CHIPSET) \

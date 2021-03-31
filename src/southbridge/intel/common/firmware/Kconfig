@@ -139,7 +139,7 @@ config EC_BIN_PATH
 config MAINBOARD_USES_IFD_DEV_EXP_REGION
 	def_bool n
 
-config HAVE_DEV_EXP_1_REGION_BIN
+config HAVE_DEV_EXP_1_BIN
 	bool "Add Device Expansion Region 1"
 	depends on HAVE_IFD_BIN && MAINBOARD_USES_IFD_DEV_EXP_REGION
 	help
@@ -151,13 +151,13 @@ config HAVE_DEV_EXP_1_REGION_BIN
 
 config DEV_EXP_1_BIN_PATH
 	string "Path to Device Expansion 1 firmware"
-	depends on HAVE_DEV_EXP_1_REGION_BIN
+	depends on HAVE_DEV_EXP_1_BIN
 	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/DeviceExp1.bin"
 
-config MAINBOARD_USES_BIOS2_REGION
+config MAINBOARD_USES_IFD_BIOS2_REGION
 	def_bool n
 
-config HAVE_BIOS2_REGION_BIN
+config HAVE_BIOS2_BIN
 	bool "Add BIOS 2 Region"
 	depends on HAVE_IFD_BIN && MAINBOARD_USES_IFD_BIOS2_REGION
 	help
@@ -169,13 +169,13 @@ config HAVE_BIOS2_REGION_BIN
 
 config BIOS2_BIN_PATH
 	string "Path to BIOS 2 firmware"
-	depends on HAVE_DEV_BIOS2_BIN
+	depends on HAVE_BIOS2_BIN
 	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/BIOS2Region.bin"
 
-config MAINBOARD_USES_IE_REGION
+config MAINBOARD_USES_IFD_IE_REGION
 	def_bool n
 
-config HAVE_IE_REGION_BIN
+config HAVE_IE_BIN
 	bool "Add Innovation Engine Region"
 	depends on HAVE_IFD_BIN && MAINBOARD_USES_IFD_IE_REGION
 	help
@@ -187,10 +187,10 @@ config HAVE_IE_REGION_BIN
 
 config IE_BIN_PATH
 	string "Path to Innovation Engine firmware"
-	depends on HAVE_DEV_IE_BIN
+	depends on HAVE_IE_BIN
 	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/IERegion.bin"
 
-config MAINBOARD_USES_10GB_REGION
+config MAINBOARD_USES_IFD_10GB_REGION
 	def_bool n
 
 config HAVE_10GB_BIN
@@ -208,7 +208,7 @@ config 10GB_BIN_PATH
 	depends on HAVE_10GB_BIN
 	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/10GbeARegion.bin"
 
-config MAINBOARD_USES_10GB_2_REGION
+config MAINBOARD_USES_IFD_10GB_2_REGION
 	def_bool n
 	depends on MAINBOARD_USES_10GB_REGION
 
@@ -227,10 +227,10 @@ config 10GB_2_BIN_PATH
 	depends on HAVE_10GB_2_BIN
 	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/10GbeARegion.bin"
 
-config MAINBOARD_USES_PTT_REGION
+config MAINBOARD_USES_IFD_PTT_REGION
 	def_bool n
 
-config HAVE_PTT_REGION_BIN
+config HAVE_PTT_BIN
 	bool "Add Platform Trust Technology Firmware Region"
 	depends on HAVE_IFD_BIN && MAINBOARD_USES_IFD_PTT_REGION
 	help
@@ -242,7 +242,7 @@ config HAVE_PTT_REGION_BIN
 
 config PTT_BIN_PATH
 	string "Path to Platform Trust Technology firmware"
-	depends on HAVE_DEV_PTT_BIN
+	depends on HAVE_PTT_BIN
 	default "3rdparty/blobs/mainboard/\$(MAINBOARDDIR)/PTTRegion.bin"
 
 choice
