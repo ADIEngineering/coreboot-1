@@ -34,6 +34,7 @@ static struct {
 	{ PCI_DEVICE_ID_INTEL_LWB_C626, "Lewisburg C626" },
 	{ PCI_DEVICE_ID_INTEL_LWB_C627, "Lewisburg C627" },
 	{ PCI_DEVICE_ID_INTEL_LWB_C628, "Lewisburg C628" },
+	{ PCI_DEVICE_ID_INTEL_LWB_SKXD, "Lewisburg in SKX-D" },
 	{ PCI_DEVICE_ID_INTEL_LWB_C629, "Lewisburg C629" },
 	{ PCI_DEVICE_ID_INTEL_LWB_C621A, "Lewisburg C621A" },
 	{ PCI_DEVICE_ID_INTEL_LWB_C627A, "Lewisburg C627A" },

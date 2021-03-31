@@ -55,12 +55,15 @@ void bootblock_pch_early_init(void)
 
 	fast_spi_early_init(SPI_BASE_ADDRESS);
 
+#if 0
+
 	/*
 	 * Enabling PWRM Base for accessing
 	 * Global Rest Cause Register.
 	 * XXX JJD, maybe not necessary
 	 */
 	soc_config_pwrmbase();
+#endif
 }
 
 void pch_early_iorange_init(void)
@@ -69,6 +72,7 @@ void pch_early_iorange_init(void)
 	 * XXX JJD, figure out if external IO ranges are needed,
 	 * (SIO, KBC, EC, etc)
 	 */
+	lpc_io_setup_comm_a_b();
 
 	/* Program generic IO Decode */
 	pch_enable_lpc();
@@ -108,6 +112,7 @@ void bootblock_pch_init(void)
 	 */
 	soc_config_acpibase();
 
+	soc_config_pwrmbase();
 	/* XXX JJD GPE config? */
 
 	enable_rtc_upper_bank();

@@ -19,6 +19,7 @@ bootblock-y += bootblock/bootblock.c
 bootblock-y += bootblock/pch.c
 bootblock-y += bootblock/report_platform.c
 bootblock-y += lpc.c
+bootblock-y += p2sb.c
 
 romstage-y += reset.c 
 romstage-y += pmc.c
@@ -27,6 +28,7 @@ romstage-y += pmc.c
 ramstage-y += acpi.c
 ramstage-y += chip.c
 ramstage-y += lpc.c
+ramstage-y += p2sb.c
 #ramstage-y += uncore.c 
 ramstage-y += reset.c 
 ramstage-y += ramstage.c 
@@ -40,6 +42,7 @@ ramstage-$(CONFIG_HAVE_SMI_HANDLER) += smmrelocate.c
 
 smm-$(CONFIG_HAVE_SMI_HANDLER) += gpio.c
 smm-$(CONFIG_HAVE_SMI_HANDLER) += pmutil.c
+smm-$(CONFIG_HAVE_SMI_HANDLER) += p2sb.c
 smm-$(CONFIG_HAVE_SMI_HANDLER) += smihandler.c
 
 postcar-y += spi.c

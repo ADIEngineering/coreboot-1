@@ -16,8 +16,8 @@ const FSPT_UPD temp_ram_init_params = {
 	},
 	.FsptCommonUpd = {
 		.Revision = 0xDE,
-//		.MicrocodeRegionBase =   (UINT32)CONFIG_CPU_MICROCODE_CBFS_LOC,
-//		.MicrocodeRegionLength = (UINT32)CONFIG_CPU_MICROCODE_CBFS_LEN,
+		.MicrocodeRegionBase =   (UINT32)CONFIG_CPU_MICROCODE_CBFS_LOC,
+		.MicrocodeRegionLength = (UINT32)CONFIG_CPU_MICROCODE_CBFS_LEN,
 		.CodeRegionBase =        (UINT32)0xFFC00000,
 		.CodeRegionLength =      (UINT32)0x00400000,
 		.Mmcfg =                 (UINT32)0xC0000000,
